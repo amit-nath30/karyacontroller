@@ -104,7 +104,8 @@
 
 //#define BOARD_WEMOSCNC
 #define MYLASER
-//#define LASERMINI
+#define LASERMINI
+#define LASERWIFI
 //#define BOARD_MINICNC_ESP01
 //#define BOARD_WEMOS_XYY_LASER
 //#define BOARD_ESP01CNC_V1
@@ -157,7 +158,8 @@
 // ==========================================================
 
 //#define ACT_KEY
-
+#define IR_KEY D2
+#define IR_OLED_MENU
 //
 #ifndef temp_pin
 #define EMULATETEMP
@@ -169,7 +171,7 @@
 #endif
 
 #if defined(ESP8266)
-//#define USEOTA
+#define USEOTA
 //#define TCPSERVER
 #define WEBSOCKSERVER
 #define WIFISERVER
@@ -190,13 +192,17 @@
 #define LASERON LOW
 
 #ifdef MYLASER
-#define LASERON LOW 
+#define LASERON LOW
 #define laser_pin D2
 //LOW
-#undef USEOTA
-#undef WIFISERVER
+//#undef USEOTA
 #undef TCPSERVER
+
+#ifndef LASERWIFI
+#undef WIFISERVER
 #undef WEBSOCKETSERVER
+#endif
+
 #undef heater_pin
 #undef temp_pin
 #define NUMBUFFER 40
@@ -204,7 +210,7 @@
 #endif
 
 #ifdef LASERMINI
-#define LASERON HIGH 
+#define LASERON HIGH
 #define laser_pin D1
 #endif
 
@@ -314,9 +320,9 @@
 #define XYCORNER 45
 #define XACCELL 1600
 #else
-#define XYJERK 5000
-#define XYCORNER 25
-#define XACCELL 1000
+#define XYJERK 9000
+#define XYCORNER 35
+#define XACCELL 200
 #endif
 
 #ifdef BOARD_WEMOS3D_COREXY
@@ -351,9 +357,9 @@
 #define YMAX 0
 #define ZMAX 159
 #else
-#define XMAX 1
-#define YMAX 1
-#define ZMAX 1
+#define XMAX 0
+#define YMAX 0
+#define ZMAX 0
 #endif
 
 #define MOTOR_X_BACKLASH 0  // MOTOR 0 = X, 1= Y 2=Z 3=E
